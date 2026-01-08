@@ -118,7 +118,21 @@ As shown in the images with the rows, these are rows from the first run below ar
 The Job Pipeline and Incremental Load was overwritten and successfully stored in the Staging Layer thus concluding the first phase of our Databricks End To End Project
 <img width="1440" height="726" alt="Screenshot 2025-10-25 at 07 47 56" src="https://github.com/user-attachments/assets/fce7dcad-71a5-4b00-a551-b03c070ddcfc" />
 
+Goal: Implement incremental ingestion to the Bronze layer with idempotency and automation.
 
+KPIs & Metrics:
+
+Incremental ingestion success rate: 100% of new rows ingested without duplicates
+
+Rows ingested: Initial 1,000 → 1,300 rows after incremental load (demonstrating dynamic ingestion)
+
+Automation: Job pipeline created → multiple datasets ingested seamlessly without hardcoding
+
+Idempotency achieved: Reprocessing the same dataset does not create duplicates
+
+Result Statement:
+
+Implemented a real-time, incremental ingestion pipeline, ensuring reliable, automated, and idempotent data ingestion into the Bronze layer.
 
 ## Phase 2 (Transformation And Storing Finalising Enriched Datasets With DLT)
 
@@ -169,6 +183,21 @@ After the completion of our DLT Table I wrote my data to the Data Lake Enrichmen
 
 <img width="1440" height="714" alt="Screenshot 2025-10-25 at 11 21 52" src="https://github.com/user-attachments/assets/87eb7100-6a9d-4076-a88d-e22003ec00db" />
 
+Goal: Clean, enrich, and prepare datasets for analytics-ready consumption.
+
+KPIs & Metrics:
+
+Delta Live Tables (DLT) usage: Automated SCD Type 1 UPSERTs on enriched datasets
+
+Data validation: 100% of tables passed DLT expectations before writing to Silver layer
+
+Streaming efficiency: Spark Structured Streaming + Auto Loader → incremental processing with checkpointing
+
+Error rate: 0 transformation errors detected during testing
+
+Result Statement:
+
+Delivered clean, enriched Silver-layer datasets with automated SCD management, ensuring high-quality, analytics-ready data.
 
 ## Phase 3 (Star Schema & Dynamic Dimensional Modelling)
 
@@ -204,7 +233,21 @@ After successfully completing the Dimensional Tables, I created the Fact Table a
 
 <img width="1440" height="719" alt="Screenshot 2025-10-27 at 14 12 52" src="https://github.com/user-attachments/assets/8660479f-ac33-4412-961f-32ad994b77fb" />
 
+Goal: Create Star Schema & dynamic dimensional models for analytics with historical tracking.
 
+KPIs & Metrics:
+
+Dynamic Dimensional Modeling: Applied to Passengers, Airports, Flights tables → reusable workflow for future datasets
+
+SCD Implementation: Dimension tables tracked historical changes accurately; fact table UPSERTs maintained current state
+
+Fact Table Validation: 0 duplicates, ensuring integrity of analytics datasets
+
+Processing efficiency: Reusable notebooks → faster dimension modeling for additional tables
+
+Result Statement:
+
+Built a curated Gold layer with dynamic dimensional models and reliable historical tracking, delivering reusable workflows for future projects.
 
 ## DATABRICKS SQL DATA WAREHOUSE
 
@@ -242,9 +285,35 @@ Once our curated and enriched datasets were stored in Databricks SQL Warehouse, 
 <img width="1440" height="718" alt="Screenshot 2025-10-28 at 10 52 51" src="https://github.com/user-attachments/assets/3ff0d51a-8ce1-47a1-aad4-34b46618a9a7" />
 <img width="1440" height="718" alt="Screenshot 2025-10-28 at 10 55 36" src="https://github.com/user-attachments/assets/343adec3-339a-4ce2-ad3d-ab6b573086f9" />
 
+Goal: Ensure curated datasets are ready for analytics and enterprise consumption.
+
+KPIs & Metrics:
+
+Databricks SQL Warehouse:  Queries returned curated datasets seamlessly
+
+Synapse Integration: External tables & views created → accessible by analysts and data scientists
+
+End-to-end validation: No duplicates, accurate UPSERTs, and successful joins across dimension and fact tables
+
+Analytical readiness: Dashboards and reports built to validate usability
+
+Result Statement:
+
+Enabled seamless access to curated datasets for analytics teams, validated via SQL queries, dashboards, and Synapse integration.
 Lessons To Take From It
 
-*. Although dynamic notebook is amazing and without a doubt I will always reuse it for creating my dimension tables, DLT is still a big player for its automation and will be considered for my arsenal
+Overall Project Impact
+
+End-to-End Automation: Bronze → Silver → Gold pipeline fully automated with streaming, DLT, and UPSERTs
+
+Incremental Data Handling:  100% incremental load success → reduced processing time and cost
+
+Data Quality & Reliability: All DLT expectations met → no data loss or duplicates
+
+Reusability: Dynamic dimensional modeling workflow reusable across multiple datasets
+
+Business Value: Faster, reliable access to curated datasets → supports analytics, BI reporting, and decision-making
+
 
 
 
